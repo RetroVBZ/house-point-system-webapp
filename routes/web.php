@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::post('/leaderboard', function(){
+Route::post('/home', function(){
+    return view('leaderboard');
+})->name('home');
+
+Route::get('/home', function(){
     return view('leaderboard');
 })->name('home');
 
