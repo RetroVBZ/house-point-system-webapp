@@ -27,38 +27,51 @@
 
     </div>
     <div class = "container">
-        <div class = "house" id = "Meghna_Magpies" style="--bg: url('{{ asset('images/meghna.png') }}')">
-            <img src="{{ asset('images/magpie.png') }}" class="house-logo">
-            <h1>1st</h1>
-            <h1>Meghna Magpies</h1>
-            <h2>Points: 256
-                Tr. Uchhaas
-            </h2>
-        </div>
-        <div class = "house" id = "Teesta_Tigers" style="--bg: url('{{ asset('images/teesta.png') }}')">
-            <img src="{{ asset('images/tigers.png') }}" class="house-logo">
-            <h1>2nd</h1>
-            <h1>Teesta Tigers</h1>
-            <h2>Points: 246
-                Tr. Salsabil
-            </h2>
-        </div>
-        <div class = "house" id = "Jamuna_Jackals" style="--bg: url('{{ asset('images/jamuna.png') }}')">
-            <img src="{{ asset('images/jackals.png') }}" class="house-logo">
-            <h1>3rd</h1>
-            <h1>Jamuna Jackals</h1>
-            <h2>Points: 236
-                Tr. Tanvir
-            </h2>
-        </div>
-        <div class = "house" id = "Padma_Pythons" style="--bg: url('{{ asset('images/padma.png') }}')">
-            <img src="{{ asset('images/pythons.png') }}" class="house-logo">
-            <h1>4th</h1>
-            <h1>Padma Pythons</h1>
-            <h2>Points: 226
-                Tr. Isat
-            </h2>
-        </div>
+
+        <a href="{{ route('meghna_magpies')  }}">       
+            <div class = "house" id = "Meghna_Magpies" style="--bg: url('{{ asset('images/meghna.png') }}')">
+                <img src="{{ asset('images/magpie.png') }}" class="house-logo"> 
+                <h1>1st</h1>
+                <h1>Meghna Magpies</h1>
+                <h2>Points: 256
+                    Tr. Uchhaas
+                </h2>
+            </div>
+         </a>
+
+         <a href="{{ route('teesta_tigers')  }}">
+            <div class = "house" id = "Teesta_Tigers" style="--bg: url('{{ asset('images/teesta.png') }}')">
+                <img src="{{ asset('images/tigers.png') }}" class="house-logo">
+                <h1>2nd</h1>
+                <h1>Teesta Tigers</h1>
+                <h2>Points: 246
+                    Tr. Salsabil
+                </h2>
+            </div>
+         </a>
+            
+        <a href="{{ route('jamuna_jackals')  }}">
+            <div class = "house" id = "Jamuna_Jackals" style="--bg: url('{{ asset('images/jamuna.png') }}')">
+                <img src="{{ asset('images/jackals.png') }}" class="house-logo">
+                <h1>3rd</h1>
+                <h1>Jamuna Jackals</h1>
+                <h2>Points: 236
+                    Tr. Tanvir
+                </h2>
+            </div>
+        </a>
+            
+        <a href="{{ route('padma_pythons')  }}">
+            <div class = "house" id = "Padma_Pythons" style="--bg: url('{{ asset('images/padma.png') }}')">
+                <img src="{{ asset('images/pythons.png') }}" class="house-logo">
+                <h1>4th</h1>
+                <h1>Padma Pythons</h1>
+                <h2>Points: 226
+                    Tr. Isat
+                </h2>
+            </div>
+        </a>
+            
     </div>
 </body>
 </html>
