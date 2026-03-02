@@ -19,7 +19,7 @@
                 </form>
                 <img src="{{ asset('images/aka_but_white.png') }}" class = "logo">
             </div>
-            <h1>
+            <h1 class="top_tab_hi">
                 Houses
             </h1>
             <div class="btn">
@@ -33,10 +33,25 @@
             </div>
 
         </div>
-        <div>
-            <h1>
-                MEGHNA MAGPIES
-            </h1>
+        <div class = "main_content">
+            <div class = "info_container">
+                <h1>
+                    1st. MEGHNA MAGPIES
+                </h1>
+                <h2 class = "points_h2">
+                    Points: 256
+                </h2>
+                <hr class = "hr1">
+                <h2 class = "teacher_h2">
+                    Teacher: Mr.Uchaas
+                </h2>
+                <hr class = "hr2">
+                <div class = "members_dropdown">
+                    <select name="Grade_Level" id="">
+                        
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="layered_bg1" style="--bg: url('{{ asset('images/magpie_bg.png')  }}')">
 
