@@ -12,6 +12,6 @@ class teachers extends Model
         'teacherID',
         'teacherFirstName',
         'teacherLastName',
-        'subject',
+        'houseID',
     ];
 }
