@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <title>Document</title>
-    @vite(['resources/css/leaderboard.css'])
+    @vite(['resources/css/leaderboard.css', 'resources/js/leaderboard.js'])
 </head>
 <body>
     <div class = "top_tab">
@@ -33,7 +36,7 @@
                 <img src="{{ asset('images/magpie.png') }}" class="house-logo"> 
                 <h1>1st</h1>
                 <h1>Meghna Magpies</h1>
-                <h2>Points: 256
+                <h2>Points: {{  $house['meghna']->points  }}
                     Tr. Uchhaas
                 </h2>
             </div>
@@ -71,7 +74,9 @@
                 </h2>
             </div>
         </a>
-            
+        <div class='credit'>
+            <span>Made By: Farhan Abdullah & Zabir Noor</span>
+        </div>
     </div>
 </body>
 </html>
