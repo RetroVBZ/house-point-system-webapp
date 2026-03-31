@@ -1,0 +1,310 @@
+body,
+div {
+    color:white;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+}
+
+@media (max-width: 400px) {
+    .btn img {
+        max-width: 50px;
+    }
+    .top_tab h1 {
+        font-size: 20px; 
+    }
+    .house-logo {
+        width: 60px;
+    }
+    .info_container h1{
+        font-size: 20px;
+    }
+}
+
+.background {
+    background-size: 250px;
+    background-image: var(--bg);
+    background-repeat: repeat;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+.background > * {
+    position: relative;
+    z-index: 2;
+}
+
+.layered_bg1,
+.layered_bg2 {
+    background-size: 250px auto;
+    position: absolute;   /* IMPORTANT */
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background-image: var(--bg);
+    background-repeat: repeat-y;
+    background-position: right 300px;
+    opacity: 0.65;
+    z-index: 1;
+}
+
+.layered_bg1 { 
+    left: 0%;
+    transform: scaleX(-1);
+    background-position: right 150px;
+
+ }
+.layered_bg2 {  
+    right: 0%;  
+ }
+
+.top_tab {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.top_tab_h1{
+    justify-self: center;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.logo{
+    max-width: 80px;
+    height:auto;
+    justify-self: start;
+}
+
+.left_icons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between back and logo */
+}
+
+
+.btn {
+    display: flex;
+    flex-direction: column;  
+    align-items: center;      
+    text-align: center;
+    font-family: monospace;
+    font-size: 20px;
+    gap: 5px;
+    transition: 0.2s;
+}
+
+
+.btn:hover{
+    cursor: pointer;
+    transition: 0.3s;
+    transform: scale(1.05);
+}
+
+.hr1{
+    border: none;
+    height: 2px;
+    background-color: white;
+    width: 70%;
+    justify-self: center;
+}
+
+.hr2 {
+    border: none;
+    height: 2px;
+    background-color: white;
+    width: 60%;
+    margin-left: 15%; /* This makes the line start from left with offset */
+    margin-bottom: 20px;
+}
+
+.info_container {
+    position: relative;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center; /* Add this to center all content inside */
+}
+.info_container h1 {
+    text-align: center;
+    font-size: clamp(24px, 6vw, 36px);
+    margin: 0 auto; /* Ensure margin doesn't affect centering */
+    width: 100%; /* Take full width */
+}
+
+.members_dropdown {
+    margin: 20px 0;
+    text-align: left;
+    width: 60%;
+    margin-left: 15%; /* Match the hr2 margin-left */
+    position: relative;
+}
+.members_dropdown option{
+    background-color: #7DBBD2;
+}
+
+.points_h2{
+    font-size: 25px;
+    margin-left: 40.55%;
+    text-align: left;
+}
+
+.teacher_h2{
+    font-size: 25px;
+    text-align: center;
+}   
+
+/* Custom Dropdown Styles */
+.custom-dropdown {
+    position: relative;
+    width: 250px;
+    margin: 0;
+}
+
+.dropdown-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #7DBBD2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.dropdown-btn:hover {
+    background-color: #2F748E;
+    transform: translateY(-2px);
+}
+
+.dropdown-btn:active {
+    transform: scale(0.98);
+}
+
+.dropdown-arrow {
+    transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.open {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #7DBBD2;
+    border-radius: 4px;
+    margin-top: 5px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.dropdown-menu.show {
+    max-height: 300px;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: bold;
+}
+
+.dropdown-menu a:hover {
+    background-color: #2F748E;
+    padding-left: 15px;
+}
+
+/* Student list styles - restored to original */
+.students-list {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    width: 60%;
+    margin-left: 15%;
+}
+
+.students-list h3 {
+    margin-bottom: 15px;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.students-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.student-item {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.student-name {
+    font-weight: bold;
+    color: #ffffff;
+    display: block;
+    transition: all 0.3s ease; 
+}
+
+.student-id {
+    font-size: 12px;
+    color: #cccccc;
+}
+
+.student-details {
+    text-align: right;
+}
+
+.student-grade {
+    background: #4CAF50;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.no-students, .select-prompt {
+    text-align: center;
+    padding: 20px;
+    color: #ffffff;
+}
+
+.student-name:hover {
+    transform: scale(1.1);
+}
+
+.credit {
+    grid-column: 1 / -1;   /* span across both columns */
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
