@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\houses;
-use App\Events\HousePointsUpdated;
 use Illuminate\Support\Facades\Log;
 
 class TeacherController extends Controller
@@ -26,7 +25,7 @@ class TeacherController extends Controller
 
     /**
      * Update points for a house.
-     * Broadcasts the change so the leaderboard can update in real-time.
+     * Works with polling system.
      */
     public function updatePoints(Request $request)
     {
@@ -48,15 +47,12 @@ class TeacherController extends Controller
 
         $house->save();
 
-        // Broadcast event for real-time updates
-        broadcast(new HousePointsUpdated($house))->toOthers();
-
-        Log::info('HousePointsUpdated event fired', [
+        Log::info('Points updated', [
             'houseID' => $house->houseID,
             'newPoints' => $house->points
         ]);
 
-        // Return JSON if AJAX
+        // Return JSON for AJAX request (so frontend can optionally refresh immediately)
         if ($request->ajax()) {
             return response()->json([
                 'status' => 'success',

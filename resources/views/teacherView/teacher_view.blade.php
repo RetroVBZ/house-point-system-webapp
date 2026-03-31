@@ -53,8 +53,8 @@
                 Tr. Salsabil
             </h2>
             <div class="controls">
-                <button onclick="openModal('2','add')">+</button>
-                <button onclick="openModal('2','remove')">−</button>
+                <button onclick="openModal('3','add')">+</button>
+                <button onclick="openModal('3','remove')">−</button>
             </div>
         </div>
 
@@ -67,8 +67,8 @@
                 Tr. Tanvir
             </h2>
             <div class="controls">
-                <button onclick="openModal('3','add')">+</button>
-                <button onclick="openModal('3','remove')">−</button>
+                <button onclick="openModal('2','add')">+</button>
+                <button onclick="openModal('2','remove')">−</button>
             </div>
         </div>
 

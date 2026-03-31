@@ -1,18 +1,40 @@
+/* leaderboard.css */
+
+/* ---------- BODY & FONT ---------- */
 body {
+    background-color: #F5F1EA;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     font-family: "Montserrat", sans-serif;
 }
 
-.container {
-    font-family: "Montserrat", sans-serif;
+/* ---------- TOP HEADER ---------- */
+.top_tab {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    padding: 20px 40px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #F5F1EA; /* Optional: add background to header */
 }
 
-span{
-    color: black;
-    text-decoration: none;
+.top_tab h1 {
+    justify-self: center;
+    margin: 0;
+    white-space: nowrap;
+    font-size: 28px;
+    font-weight: 700;
 }
+
+.top_tab img.logo {
+    max-width: 80px;
+    height: auto;
+    justify-self: start;
+}
+
+/* Button styling */
 .btn {
     display: flex;
     flex-direction: column;  
@@ -24,6 +46,12 @@ span{
     transition: 0.2s;
 }
 
+.btn:hover {
+    cursor: pointer;
+    transition: transform 0.3s;
+    transform: scale(1.05);
+}
+
 @media (min-width: 768px) {
     .btn {
         flex-direction: row; 
@@ -33,24 +61,20 @@ span{
 }
 
 @media (max-width: 400px) {
-    .btn img {
-        max-width: 50px;
-    }
-    .top_tab h1 {
-        font-size: 20px; 
-    }
-    .house-logo {
-        width: 60px;
-    }
+    .btn img { max-width: 50px; }
+    .top_tab h1 { font-size: 20px; }
+    .house-logo { width: 60px; }
 }
 
-.top_tab {
+/* ---------- HOUSE GRID ---------- */
+.container {
     display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: center;
-    padding: 20px 40px;
-    width: 100%;
-    box-sizing: border-box;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 80%;
+    max-width: 100%;
+    justify-items: center;
+    margin: 20px auto 0;
 }
 
 .container a {
@@ -60,22 +84,7 @@ span{
     color: inherit;
 }
 
-.top_tab h1{
-    justify-self: center;
-    margin: 0;
-    white-space: nowrap;
-}
-
-.container{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    width: 80%;
-    max-width: 100%;
-
-    justify-items: center;
-    margin: 0 auto;
-}
+/* ---------- HOUSE CARD ---------- */
 .house {
     position: relative;
     width: 100%;
@@ -83,7 +92,11 @@ span{
     border-radius: 20px;
     text-align: center;
     color: white;
-    transition: 0.2s;
+    cursor: pointer;
+
+    /* FLIP support: smooth transform for reorder & hover */
+    transition: transform 0.5s ease, opacity 0.3s ease;
+    will-change: transform;
 }
 
 .house::before {
@@ -108,67 +121,38 @@ span{
     height: auto;
 }
 
-.logo{
-    max-width: 80px;
-    height:auto;
-    justify-self: start;
-}
+/* Background images for each house */
+#meghna::before { background-image: var(--bg); }
+#teesta::before { background-image: var(--bg); }
+#jamuna::before { background-image: var(--bg); }
+#padma::before { background-image: var(--bg); }
 
-/*
-.bg_design{
-    flex: 1 1 140px; 
-    max-width: 300px; 
-    margin: 20px; 
-    height: 300px;
-    border-radius: 20px;
-    text-align: center;
-    color: white;
-}
-*/
+/* ---------- HOVER EFFECTS ---------- */
+#meghna:hover { transform: translate(-10px, -10px) scale(1.05); }
+#teesta:hover { transform: translate(10px, -10px) scale(1.05); }
+#jamuna:hover { transform: translate(-10px, 10px) scale(1.05); }
+#padma:hover { transform: translate(10px, 10px) scale(1.05); }
 
-#Meghna_Magpies::before{
-    background-image: var(--bg);
-}
-#Teesta_Tigers::before{
-    background-image: var(--bg);
-}
-#Jamuna_Jackals::before{
-    background-image: var(--bg);
-}
-#Padma_Pythons::before{
-    background-image: var(--bg);
-}
-
-#Meghna_Magpies:hover{
-    transition: 0.3s;
-    transform: translate(-10px, -10px);
-}
-
-#Teesta_Tigers:hover{
-    transition: 0.3s;
-    transform: translate(10px, -10px);
-}
-
-#Jamuna_Jackals:hover{
-    transition: 0.3s;
-    transform: translate(-10px, 10px);
-}
-
-#Padma_Pythons:hover{
-    transition: 0.3s;
-    transform: translate(10px, 10px);
-}
-
-.btn:hover{
-    cursor: pointer;
-    transition: 0.3s;
-    transform: scale(1.05);
-    ;
-}
-
+/* ---------- CREDIT ---------- */
 .credit {
     grid-column: 1 / -1;   /* span across both columns */
     text-align: center;
     margin-top: 20px;
     font-family: 'Courier New', Courier, monospace;
+}
+
+/* ---------- OPTIONAL: rank text inside house cards ---------- */
+.house h1:first-of-type {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.house h1:nth-of-type(2) {
+    font-size: 24px;
+    margin: 5px 0;
+}
+
+.house h2 {
+    font-size: 18px;
+    margin: 2px 0;
 }

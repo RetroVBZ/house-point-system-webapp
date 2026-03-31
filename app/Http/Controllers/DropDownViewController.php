@@ -12,8 +12,8 @@ class DropDownViewController extends Controller
     private function pointsUpdateGlobal(){
         $house = [
             'meghna' => houses::where('houseID', 1)->first(),
-            'teesta' => houses::where('houseID', 2)->first(),
-            'jamuna' => houses::where('houseID', 3)->first(),
+            'teesta' => houses::where('houseID', 3)->first(),
+            'jamuna' => houses::where('houseID', 2)->first(),
             'padma'  => houses::where('houseID', 4)->first(),
         ];
         return $house;
@@ -22,6 +22,16 @@ class DropDownViewController extends Controller
         $house = $this->pointsUpdateGlobal();
 
         return view('leaderboard', compact('house'));
+    }
+    public function getPoints(){
+        $houses = $this->pointsUpdateGlobal();
+
+        return response()->json([
+            'meghna' => ['points' => $houses['meghna']->points],
+            'teesta' => ['points' => $houses['teesta']->points],
+            'jamuna' => ['points' => $houses['jamuna']->points],
+            'padma'  => ['points' => $houses['padma']->points],
+        ]);
     }
     public function showMeghnaMagpies(Request $request)
     {

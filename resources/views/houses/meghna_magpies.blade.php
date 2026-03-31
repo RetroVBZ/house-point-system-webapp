@@ -41,8 +41,8 @@
                 <h1>
                     1st. MEGHNA MAGPIES
                 </h1>
-                <h2 class="points_h2">
-                    Points: {{ $house->points ?? 256 }}
+                <h2 class="points_h2" data-house="meghna">
+                    Points: {{ $house->points }}
                 </h2>
                 <hr class="hr1">
                 <h2 class="teacher_h2">

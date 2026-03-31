@@ -30,7 +30,7 @@
                     @csrf
                     <button type="submit" class="btn" style="border: none; background: none; display: flex; align-items: center; gap: 5px;">
                         <img src="{{ asset('images/image.png') }}" class="logo" alt="Logout">
-                        <span>Imaad</span>
+                        <span>StudentView</span>
                     </button>
                 </form>
             </div>
@@ -41,8 +41,8 @@
                 <h1>
                     1st. Jamuna Jackals
                 </h1>
-                <h2 class="points_h2">
-                    Points: {{ $house->points ?? 256 }}
+                <h2 class="points_h2" data-house="jamuna">
+                    Points: {{  $house->points  }}
                 </h2>
                 <hr class="hr1">
                 <h2 class="teacher_h2">
