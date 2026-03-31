@@ -8,6 +8,8 @@ Route::get('/home', [DropDownViewController::class, 'showLeaderboard'])->name('h
 
 Route::post('/home', [DropDownViewController::class, 'showLeaderboard'])->name('home');
 
+Route::get('/home/points', [DropDownViewController::class, 'getPoints'])->name('home.points');
+
 Route::get('/houses/meghna_magpies', [DropDownViewController::class, 'showMeghnaMagpies'])->name('meghna_magpies');
 
 Route::get('/houses/teesta_tigers', [DropDownViewController::class, 'showTeestaTigers'])->name('teesta_tigers');

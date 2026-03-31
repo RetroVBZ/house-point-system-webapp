@@ -41,7 +41,7 @@
                 <h1>
                     1st. Teesta Tigers
                 </h1>
-                <h2 class="points_h2">
+                <h2 class="points_h2" data-house="teesta">
                     Points: {{ $house->points ?? 256 }}
                 </h2>
                 <hr class="hr1">

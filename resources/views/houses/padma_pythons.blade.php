@@ -41,7 +41,7 @@
                 <h1>
                     1st. Padma Pythons
                 </h1>
-                <h2 class="points_h2">
+                <h2 class="points_h2" data-house="padma">
                     Points: {{ $house->points ?? 256 }}
                 </h2>
                 <hr class="hr1">
