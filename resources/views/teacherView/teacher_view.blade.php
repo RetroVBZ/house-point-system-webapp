@@ -33,7 +33,6 @@
         <!-- Meghna Magpies -->
         <div class="house" id="Meghna_Magpies" style="--bg: url('{{ asset('images/meghna.png') }}')">
             <img src="{{ asset('images/magpie.png') }}" class="house-logo"> 
-            <h1>1st</h1>
             <h1>Meghna Magpies</h1>
             <h2>Points: {{  $houses['meghna']->points  }}
                 Tr. Uchhaas
@@ -47,9 +46,8 @@
         <!-- Teesta Tigers -->
         <div class="house" id="Teesta_Tigers" style="--bg: url('{{ asset('images/teesta.png') }}')">
             <img src="{{ asset('images/tigers.png') }}" class="house-logo">
-            <h1>2nd</h1>
             <h1>Teesta Tigers</h1>
-            <h2>Points: 246
+            <h2>Points: {{  $houses['teesta']->points  }}
                 Tr. Salsabil
             </h2>
             <div class="controls">
@@ -61,9 +59,8 @@
         <!-- Jamuna Jackals -->
         <div class="house" id="Jamuna_Jackals" style="--bg: url('{{ asset('images/jamuna.png') }}')">
             <img src="{{ asset('images/jackals.png') }}" class="house-logo">
-            <h1>3rd</h1>
             <h1>Jamuna Jackals</h1>
-            <h2>Points: 236
+            <h2>Points: {{ $houses['jamuna']->points }}
                 Tr. Tanvir
             </h2>
             <div class="controls">
@@ -75,9 +72,8 @@
         <!-- Padma Pythons -->
         <div class="house" id="Padma_Pythons" style="--bg: url('{{ asset('images/padma.png') }}')">
             <img src="{{ asset('images/pythons.png') }}" class="house-logo">
-            <h1>4th</h1>
             <h1>Padma Pythons</h1>
-            <h2>Points: 226
+            <h2>Points: {{  $houses['padma']->points  }}
                 Tr. Isat
             </h2>
             <div class="controls">

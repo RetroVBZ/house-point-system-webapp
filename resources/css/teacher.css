@@ -3,6 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: "Montserrat", sans-serif;
+    background-color: #F5F1EA;
 }
 
 .container {

@@ -30,7 +30,7 @@
                     @csrf
                     <button type="submit" class="btn" style="border: none; background: none; display: flex; align-items: center; gap: 5px;">
                         <img src="{{ asset('images/image.png') }}" class="logo" alt="Logout">
-                        <span>Imaad</span>
+                        <span>StudentView</span>
                     </button>
                 </form>
             </div>

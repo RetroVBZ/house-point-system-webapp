@@ -15,8 +15,8 @@ class TeacherController extends Controller
     {
         $houses = [
             'meghna' => houses::where('houseID', 1)->first(),
-            'teesta' => houses::where('houseID', 2)->first(),
-            'jamuna' => houses::where('houseID', 3)->first(),
+            'jamuna' => houses::where('houseID', 2)->first(),
+            'teesta' => houses::where('houseID', 3)->first(),
             'padma'  => houses::where('houseID', 4)->first(),
         ];
 

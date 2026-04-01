@@ -2,6 +2,25 @@
 
 document.addEventListener('DOMContentLoaded', function() {
 
+    // Rank calc function
+    function calculateRanks(items) {
+        let lastPoints = null;
+        let lastRank = 0;
+    
+        return items.map((item, index) => {
+            const points = parseInt(item.points);
+        
+            if (points === lastPoints) {
+                return { ...item, rank: lastRank, tied: true };
+            }
+        
+            const rank = index + 1;
+            lastPoints = points;
+            lastRank = rank;
+        
+            return { ...item, rank, tied: false };
+        });
+    }
     // Dropdown logic
     const dropdownBtn = document.getElementById('dropdownBtn');
     const dropdownMenu = document.getElementById('dropdownMenu');
@@ -70,26 +89,50 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Polling house points
+    // Polling house points + rank
     const pointsH2 = document.querySelector('.points_h2[data-house]');
+    const rankEl = document.getElementById('rank');
+
     if (pointsH2) {
-        const houseKey = pointsH2.dataset.house; // Now defined safely
+        const houseKey = pointsH2.dataset.house;
 
         function fetchHousePoints() {
             fetch('/home/points')
                 .then(res => res.json())
                 .then(data => {
-                    if (data[houseKey]) {
-                        pointsH2.innerText = `Points: ${data[houseKey].points}`;
+
+                    // Convert to sortable array
+                    const houses = Object.keys(data).map(key => ({
+                        id: key,
+                        points: data[key].points
+                    }));
+
+                    // Sort descending
+                    houses.sort((a, b) => b.points - a.points);
+
+                    // Apply ranking with ties
+                    const ranked = calculateRanks(houses);
+
+                    const current = ranked.find(h => h.id === houseKey);
+                    if (!current) return;
+
+                    // Update points
+                    pointsH2.innerText = `Points: ${current.points}`;
+
+                    // Update rank
+                    if (rankEl) {
+                        const suffix =
+                            current.rank === 1 ? 'st' :
+                            current.rank === 2 ? 'nd' :
+                            current.rank === 3 ? 'rd' : 'th';
+
+                        rankEl.innerText = `${current.tied ? '=' : ''}${current.rank}${suffix}`;
                     }
                 })
                 .catch(err => console.error('Error fetching house points:', err));
         }
 
-        // Initial fetch
         fetchHousePoints();
-
-        // Poll every 5 seconds
         setInterval(fetchHousePoints, 5000);
     }
 });
