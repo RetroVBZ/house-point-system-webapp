@@ -38,8 +38,11 @@
         
         <div class="main_content">
             <div class="info_container">
+                <h1 id="rank">
+                    1st.
+                </h1>
                 <h1>
-                    1st. Padma Pythons
+                    Padma Pythons
                 </h1>
                 <h2 class="points_h2" data-house="padma">
                     Points: {{ $house->points ?? 256 }}
