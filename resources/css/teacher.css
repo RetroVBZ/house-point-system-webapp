@@ -3,6 +3,7 @@ body {
     display: flex;
     flex-direction: column;
     font-family: "Montserrat", sans-serif;
+    background-color: #F5F1EA;
 }
 
 .container {
@@ -217,4 +218,32 @@ span{
     margin: 5px;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+.points-history-container {
+    grid-column: 1 / -1;
+    width: 90%;
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+.points-history {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: "Montserrat", sans-serif;
+    color: #333;
+}
+
+.points-history th, .points-history td {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.points-history th {
+    background-color: #f0f0f0;
+}
+
+.points-history tr:nth-child(even) {
+    background-color: #fafafa;
 }

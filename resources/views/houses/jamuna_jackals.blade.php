@@ -30,7 +30,12 @@
                     @csrf
                     <button type="submit" class="btn" style="border: none; background: none; display: flex; align-items: center; gap: 5px;">
                         <img src="{{ asset('images/image.png') }}" class="logo" alt="Logout">
-                        <span>StudentView</span>
+                        <span>
+                        {{ session('studentFirstName') && session('studentLastName') 
+                            ? session('studentFirstName') . ' ' . session('studentLastName') 
+                            : 'StudentView' 
+                        }}
+                        </span>
                     </button>
                 </form>
             </div>
@@ -38,8 +43,11 @@
         
         <div class="main_content">
             <div class="info_container">
+                <h1 id="rank">
+                    1st.
+                </h1>
                 <h1>
-                    1st. Jamuna Jackals
+                    Jamuna Jackals
                 </h1>
                 <h2 class="points_h2" data-house="jamuna">
                     Points: {{  $house->points  }}

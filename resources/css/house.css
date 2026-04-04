@@ -24,6 +24,7 @@ div {
     background-size: 250px;
     background-image: var(--bg);
     background-repeat: repeat;
+    opacity: 0.98;
     background-position: center;
     position: relative;
     width: 100%;

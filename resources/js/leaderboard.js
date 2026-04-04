@@ -1,10 +1,27 @@
-// ANNOYING CODE EW
-
 document.addEventListener('DOMContentLoaded', function () {
-    const container = document.getElementById('houseContainer'); // 2x2 grid container
-    const POLL_INTERVAL = 5000; // 5 seconds
 
-    // Helper: fetch points from server
+    function calculateRanks(items) {
+        let lastPoints = null;
+        let lastRank = 0;
+    
+        return items.map((item, index) => {
+            const points = parseInt(item.points);
+        
+            if (points === lastPoints) {
+                return { ...item, rank: lastRank, tied: true };
+            }
+        
+            const rank = index + 1;
+            lastPoints = points;
+            lastRank = rank;
+        
+            return { ...item, rank, tied: false };
+        });
+    }
+    
+    const container = document.getElementById('houseContainer'); // your 2x2 grid container
+    const POLL_INTERVAL = 5000;
+
     async function fetchHousePoints() {
         try {
             const res = await fetch('/home/points');
@@ -16,77 +33,89 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // FLIP animation: First-Last-Invert-Play
-    function flipReorder(cards) {
-        if (!cards || cards.length === 0) return;
+    // FLIP animation on <a> elements
+    function flipReorder(links) {
+        const firstRects = links.map(link => link.getBoundingClientRect());
 
-        // 1️⃣ Record current positions
-        const firstRects = cards.map(card => card.getBoundingClientRect());
+        // Append links in new order
+        links.forEach(link => container.appendChild(link));
 
-        // 2️⃣ Append cards in new order (DOM reflow)
-        cards.forEach(card => container.appendChild(card));
+        const lastRects = links.map(link => link.getBoundingClientRect());
 
-        // 3️⃣ Record new positions
-        const lastRects = cards.map(card => card.getBoundingClientRect());
-
-        // 4️⃣ Apply invert transform
-        cards.forEach((card, i) => {
+        // Apply invert transform
+        links.forEach((link, i) => {
             const dx = firstRects[i].left - lastRects[i].left;
             const dy = firstRects[i].top - lastRects[i].top;
 
-            card.style.transition = 'none'; // disable transition temporarily
-            card.style.transform = `translate(${dx}px, ${dy}px)`;
+            link.style.transition = 'none';
+            link.style.transform = `translate(${dx}px, ${dy}px)`;
         });
 
-        // Force browser reflow
+        // Force reflow
         void container.offsetWidth;
 
-        // 5️⃣ Play animation to new position
+        // Animate to new positions
         requestAnimationFrame(() => {
-            cards.forEach(card => {
-                card.style.transition = 'transform 0.5s ease';
-                card.style.transform = ''; // smooth animation to new position
+            links.forEach(link => {
+                link.style.transition = 'transform 0.5s ease';
+                link.style.transform = '';
             });
         });
     }
 
-    // Update points and reorder cards
     async function updateAndReorder() {
         const data = await fetchHousePoints();
         if (!data) return;
 
-        const cards = Array.from(container.querySelectorAll('.house'));
+        // Select <a> wrappers
+        const links = Array.from(container.querySelectorAll('a'));
+        const cards = links.map(link => link.querySelector('.house'));
 
-        // Update points inside each card & store in dataset
+        // Update points inside each card
         cards.forEach(card => {
-            const houseKey = card.id; // IDs: meghna, teesta, jamuna, padma
+            const houseKey = card.id;
             if (data[houseKey]) {
                 const pointsEl = card.querySelector('h2');
-                if (pointsEl) pointsEl.innerText = `Points: ${data[houseKey].points}`;
+                pointsEl.innerText = `Points: ${data[houseKey].points}`;
                 card.dataset.points = data[houseKey].points;
             }
         });
 
-        // Sort cards by points descending
-        const prevOrder = cards.map(c => c.id).join(',');
-        cards.sort((a, b) => b.dataset.points - a.dataset.points);
-        const newOrder = cards.map(c => c.id).join(',');
+        // Sort links by card points descending
+        const prevOrder = links.map(l => l.querySelector('.house').id).join(',');
+        links.sort((a, b) => b.querySelector('.house').dataset.points - a.querySelector('.house').dataset.points);
+        const newOrder = links.map(l => l.querySelector('.house').id).join(',');
 
-        // Animate only if order changed
         if (prevOrder !== newOrder) {
-            flipReorder(cards);
+            flipReorder(links);
         }
 
-        // Update rank numbers
-        cards.forEach((card, i) => {
-            const h1Rank = card.querySelector('h1:first-of-type');
-            if (h1Rank) h1Rank.innerText = `${i + 1}${i === 0 ? 'st' : i === 1 ? 'nd' : i === 2 ? 'rd' : 'th'}`;
+        // Build structured data
+        const structured = links.map(link => {
+            const card = link.querySelector('.house');
+            return {
+                link,
+                card,
+                id: card.id,
+                points: parseInt(card.dataset.points)
+            };
+        });
+
+        // Already sorted earlier, so just rank them
+        const ranked = calculateRanks(structured);
+
+        ranked.forEach(({ card, rank, tied }) => {
+            const rankEl = card.querySelector('h1:first-of-type');
+        
+            const suffix =
+                rank === 1 ? 'st' :
+                rank === 2 ? 'nd' :
+                rank === 3 ? 'rd' : 'th';
+        
+            rankEl.innerText = `${tied ? '=' : ''}${rank}${suffix}`;
         });
     }
 
-    // Initial update
     updateAndReorder();
-
-    // Poll every 5 seconds
     setInterval(updateAndReorder, POLL_INTERVAL);
 });

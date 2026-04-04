@@ -18,11 +18,20 @@
         </div>
         <h1>Welcome Back</h1>
         <div class="btn">
-            <form method="POST" action="{{ route('home') }}">
-            @csrf
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
                 <button type="submit" class="btn" style="border: none; background: none; display: flex; align-items: center; gap: 5px;">
                     <img src="{{ asset('images/image.png') }}" class="logo" alt="Logout">
-                    <span>TeacherView</span>
+
+                    @php
+                        $teacher = \App\Http\Controllers\AuthController::currentUser();
+                    @endphp
+
+                    @if($teacher)
+                        <span>{{ $teacher->teacherName }}</span>
+                    @else
+                        <span>TeacherView</span>
+                    @endif
                 </button>
             </form>
         </div>
@@ -33,7 +42,6 @@
         <!-- Meghna Magpies -->
         <div class="house" id="Meghna_Magpies" style="--bg: url('{{ asset('images/meghna.png') }}')">
             <img src="{{ asset('images/magpie.png') }}" class="house-logo"> 
-            <h1>1st</h1>
             <h1>Meghna Magpies</h1>
             <h2>Points: {{  $houses['meghna']->points  }}
                 Tr. Uchhaas
@@ -47,9 +55,8 @@
         <!-- Teesta Tigers -->
         <div class="house" id="Teesta_Tigers" style="--bg: url('{{ asset('images/teesta.png') }}')">
             <img src="{{ asset('images/tigers.png') }}" class="house-logo">
-            <h1>2nd</h1>
             <h1>Teesta Tigers</h1>
-            <h2>Points: 246
+            <h2>Points: {{  $houses['teesta']->points  }}
                 Tr. Salsabil
             </h2>
             <div class="controls">
@@ -61,9 +68,8 @@
         <!-- Jamuna Jackals -->
         <div class="house" id="Jamuna_Jackals" style="--bg: url('{{ asset('images/jamuna.png') }}')">
             <img src="{{ asset('images/jackals.png') }}" class="house-logo">
-            <h1>3rd</h1>
             <h1>Jamuna Jackals</h1>
-            <h2>Points: 236
+            <h2>Points: {{ $houses['jamuna']->points }}
                 Tr. Tanvir
             </h2>
             <div class="controls">
@@ -75,9 +81,8 @@
         <!-- Padma Pythons -->
         <div class="house" id="Padma_Pythons" style="--bg: url('{{ asset('images/padma.png') }}')">
             <img src="{{ asset('images/pythons.png') }}" class="house-logo">
-            <h1>4th</h1>
             <h1>Padma Pythons</h1>
-            <h2>Points: 226
+            <h2>Points: {{  $houses['padma']->points  }}
                 Tr. Isat
             </h2>
             <div class="controls">
@@ -90,7 +95,29 @@
             <span>Made By: Farhan Abdullah & Zabir Noor</span>
         </div>
     </div>
-
+    <div class="points-history-container">
+        <h2>Points History</h2>
+        <table class="points-history">
+            <thead>
+                <tr>
+                    <th>House</th>
+                    <th>Teacher</th>
+                    <th>Points</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($pointsHistory as $record)
+                    <tr>
+                        <td>{{ $record->houseName }}</td>
+                        <td>{{ $record->teacherName }}</td>
+                        <td>{{ $record->Points }}</td>
+                        <td>{{ $record->Time }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     <!-- Single popout modal -->
     <div id="pointModal" class="modal">
         <div class="modal-content">
@@ -103,7 +130,6 @@
                 <input type="hidden" name="houseID" id="modalHouseID">
                 <input type="hidden" name="action" id="modalAction">
 
-                <input type="text" name="teacher_name" placeholder="Your name" required>
                 <input type="number" name="points" placeholder="Enter points" required>
 
                 <button type="submit">Submit</button>

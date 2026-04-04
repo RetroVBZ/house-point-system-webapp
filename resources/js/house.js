@@ -1,8 +1,30 @@
-// Even more annoying code
-
 document.addEventListener('DOMContentLoaded', function() {
 
+    // ===============================
+    // Ranking helper function
+    // ===============================
+    function calculateRanks(items) {
+        let lastPoints = null;
+        let lastRank = 0;
+
+        return items.map((item, index) => {
+            const points = parseInt(item.points) || 0;
+
+            if (points === lastPoints) {
+                return { ...item, rank: lastRank, tied: true };
+            }
+
+            const rank = index + 1;
+            lastPoints = points;
+            lastRank = rank;
+
+            return { ...item, rank, tied: false };
+        });
+    }
+
+    // ===============================
     // Dropdown logic
+    // ===============================
     const dropdownBtn = document.getElementById('dropdownBtn');
     const dropdownMenu = document.getElementById('dropdownMenu');
     const dropdownArrow = document.getElementById('dropdownArrow');
@@ -41,7 +63,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // ===============================
     // Student hover effect
+    // ===============================
     const studentNames = document.querySelectorAll('.student-name');
     studentNames.forEach(name => {
         const currentItem = name.closest('.student-item');
@@ -70,20 +94,52 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Polling house points
+    // ===============================
+    // Poll house points + rank
+    // ===============================
     const pointsH2 = document.querySelector('.points_h2[data-house]');
-    if (pointsH2) {
-        const houseKey = pointsH2.dataset.house; // Now defined safely
+    const rankEl = document.getElementById('rank'); // optional, can add a rank <h2> in Blade
 
-        function fetchHousePoints() {
-            fetch('/home/points')
-                .then(res => res.json())
-                .then(data => {
-                    if (data[houseKey]) {
-                        pointsH2.innerText = `Points: ${data[houseKey].points}`;
-                    }
-                })
-                .catch(err => console.error('Error fetching house points:', err));
+    if (pointsH2) {
+        const houseKey = pointsH2.dataset.house.toLowerCase(); // ensure lowercase
+
+        async function fetchHousePoints() {
+            try {
+                const res = await fetch('/home/points');
+                if (!res.ok) throw new Error('Network error');
+                const data = await res.json();
+
+                // Convert backend data into sortable array
+                const houses = Object.keys(data).map(key => ({
+                    id: key.toLowerCase(),
+                    points: data[key].points
+                }));
+
+                // Sort descending
+                houses.sort((a, b) => b.points - a.points);
+
+                // Apply ranking (with tie logic)
+                const ranked = calculateRanks(houses);
+
+                // Find the current house
+                const current = ranked.find(h => h.id === houseKey);
+                if (!current) return;
+
+                // Update points
+                pointsH2.innerText = `Points: ${current.points}`;
+
+                // Update rank if rankEl exists
+                if (rankEl) {
+                    const suffix =
+                        current.rank === 1 ? 'st' :
+                        current.rank === 2 ? 'nd' :
+                        current.rank === 3 ? 'rd' : 'th';
+                    rankEl.innerText = `${current.tied ? '=' : ''}${current.rank}${suffix}`;
+                }
+
+            } catch (err) {
+                console.error('Error fetching house points:', err);
+            }
         }
 
         // Initial fetch
@@ -92,4 +148,5 @@ document.addEventListener('DOMContentLoaded', function() {
         // Poll every 5 seconds
         setInterval(fetchHousePoints, 5000);
     }
+
 });

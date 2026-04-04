@@ -9,9 +9,9 @@ class teachers extends Model
     protected $table = 'teachers';
     protected $primaryKey = 'teacherID';
     protected $fillable = [
-        'teacherID',
-        'teacherFirstName',
-        'teacherLastName',
+        'teacherName',
         'subject',
+        'houseID',
+        'password'
     ];
 }
