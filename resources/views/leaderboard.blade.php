@@ -11,67 +11,71 @@
     @vite(['resources/css/leaderboard.css', 'resources/js/leaderboard.js'])
 </head>
 <body>
-    <div class = "top_tab">
+    <div class="top_tab">
         <div>
-            <img src="{{ asset('images/logo.png') }}" class = "logo">
+            <img src="{{ asset('images/logo.png') }}" class="logo">
         </div>
         <h1>
             Welcome Back
         </h1>
         <div class="btn">
-            <form method="POST" action="{{ route('home') }}">
-            @csrf
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
                 <button type="submit" class="btn" style="border: none; background: none; display: flex; align-items: center; gap: 5px;">
                     <img src="{{ asset('images/image.png') }}" class="logo" alt="Logout">
-                    <span>StudentView</span>
+                    <span>
+                        {{ session('studentFirstName') && session('studentLastName') 
+                            ? session('studentFirstName') . ' ' . session('studentLastName') 
+                            : 'StudentView' 
+                        }}
+                    </span>
                 </button>
             </form>
         </div>
-
     </div>
-    <div class = "container" id="houseContainer">
 
+    <div class="container" id="houseContainer">
         <a href="{{ route('meghna_magpies')  }}">       
-            <div class = "house" id = "meghna" data-house="meghna" style="--bg: url('{{ asset('images/meghna.png') }}')">
+            <div class="house" id="meghna" data-house="meghna" style="--bg: url('{{ asset('images/meghna.png') }}')">
                 <img src="{{ asset('images/magpie.png') }}" class="house-logo"> 
                 <h1>1st</h1>
                 <h1>Meghna Magpies</h1>
-                <h2>Points: {{  $house['meghna']->points  }}</h2>
-                <h2>Tr. Uchhaas</h2>
+                <h2>Points: {{  $houses['meghna']->points  }}</h2>
+                <h2>Teacher: {{ $teachers['meghna']->teacherName ?? 'Mr.Uchaas' }}</h2>
             </div>
          </a>
 
          <a href="{{ route('teesta_tigers')  }}">
-            <div class = "house" id = "teesta" data-house="teesta" style="--bg: url('{{ asset('images/teesta.png') }}')">
+            <div class="house" id="teesta" data-house="teesta" style="--bg: url('{{ asset('images/teesta.png') }}')">
                 <img src="{{ asset('images/tigers.png') }}" class="house-logo">
                 <h1>2nd</h1>
                 <h1>Teesta Tigers</h1>
-                <h2>Points: {{  $house['teesta']->points  }}</h2>
-                <h2>Tr.Salsabil</h2>
+                <h2>Points: {{  $houses['teesta']->points  }}</h2>
+                <h2>Teacher: {{ $teachers['teesta']->teacherName ?? 'Mr.Uchaas' }}</h2>
             </div>
          </a>
             
         <a href="{{ route('jamuna_jackals')  }}">
-            <div class = "house" id = "jamuna" data-house="jamuna" style="--bg: url('{{ asset('images/jamuna.png') }}')">
+            <div class="house" id="jamuna" data-house="jamuna" style="--bg: url('{{ asset('images/jamuna.png') }}')">
                 <img src="{{ asset('images/jackals.png') }}" class="house-logo">
                 <h1>3rd</h1>
                 <h1>Jamuna Jackals</h1>
-                <h2>Points: {{  $house['jamuna']->points  }}</h2>
-                <h2>Tr.Tanvir</h2>
+                <h2>Points: {{  $houses['jamuna']->points  }}</h2>
+                <h2>Teacher: {{ $teachers['jamuna']->teacherName ?? 'Mr.Uchaas' }}</h2>
             </div>
         </a>
             
         <a href="{{ route('padma_pythons')  }}">
-            <div class = "house" id = "padma" data-house="padma" style="--bg: url('{{ asset('images/padma.png') }}')">
+            <div class="house" id="padma" data-house="padma" style="--bg: url('{{ asset('images/padma.png') }}')">
                 <img src="{{ asset('images/pythons.png') }}" class="house-logo">
                 <h1>4th</h1>
                 <h1>Padma Pythons</h1>
-                <h2>Points: {{  $house['padma']->points  }}</h2>
-                <h2>Tr. Israt</h2>
+                <h2>Points: {{  $houses['padma']->points  }}</h2>
+                <h2>Teacher: {{ $teachers['padma']->teacherName ?? 'Mr.Uchaas' }}</h2>
             </div>
         </a>
-
     </div>
+
     <div class='credit'>
         <span>Made By: Farhan Abdullah & Zabir Noor</span>
     </div>

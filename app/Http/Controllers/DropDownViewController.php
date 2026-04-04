@@ -19,9 +19,18 @@ class DropDownViewController extends Controller
         return $house;
     }
     public function showLeaderboard(){
-        $house = $this->pointsUpdateGlobal();
-
-        return view('leaderboard', compact('house'));
+        $houses = $this->pointsUpdateGlobal();
+        $student = \App\Http\Controllers\AuthController::currentUser();
+    
+        // Fetch teachers for each house
+        $teachers = [
+            'meghna' => teachers::where('houseID', 1)->first(),
+            'teesta' => teachers::where('houseID', 3)->first(),
+            'jamuna' => teachers::where('houseID', 2)->first(),
+            'padma'  => teachers::where('houseID', 4)->first(),
+        ];
+    
+        return view('leaderboard', compact('houses', 'student', 'teachers'));
     }
     public function getPoints(){
         $houses = $this->pointsUpdateGlobal();

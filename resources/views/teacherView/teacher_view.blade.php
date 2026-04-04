@@ -18,11 +18,20 @@
         </div>
         <h1>Welcome Back</h1>
         <div class="btn">
-            <form method="POST" action="{{ route('home') }}">
-            @csrf
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
                 <button type="submit" class="btn" style="border: none; background: none; display: flex; align-items: center; gap: 5px;">
                     <img src="{{ asset('images/image.png') }}" class="logo" alt="Logout">
-                    <span>TeacherView</span>
+
+                    @php
+                        $teacher = \App\Http\Controllers\AuthController::currentUser();
+                    @endphp
+
+                    @if($teacher)
+                        <span>{{ $teacher->teacherName }}</span>
+                    @else
+                        <span>TeacherView</span>
+                    @endif
                 </button>
             </form>
         </div>
@@ -86,7 +95,29 @@
             <span>Made By: Farhan Abdullah & Zabir Noor</span>
         </div>
     </div>
-
+    <div class="points-history-container">
+        <h2>Points History</h2>
+        <table class="points-history">
+            <thead>
+                <tr>
+                    <th>House</th>
+                    <th>Teacher</th>
+                    <th>Points</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($pointsHistory as $record)
+                    <tr>
+                        <td>{{ $record->houseName }}</td>
+                        <td>{{ $record->teacherName }}</td>
+                        <td>{{ $record->Points }}</td>
+                        <td>{{ $record->Time }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
     <!-- Single popout modal -->
     <div id="pointModal" class="modal">
         <div class="modal-content">
@@ -99,7 +130,6 @@
                 <input type="hidden" name="houseID" id="modalHouseID">
                 <input type="hidden" name="action" id="modalAction">
 
-                <input type="text" name="teacher_name" placeholder="Your name" required>
                 <input type="number" name="points" placeholder="Enter points" required>
 
                 <button type="submit">Submit</button>

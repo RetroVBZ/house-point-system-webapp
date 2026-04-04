@@ -1,0 +1,159 @@
+/* Body & layout */
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #E2F2E8;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Top tab header */
+.top_tab {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #E2F2E8;
+    color: black;
+    position: relative; /* needed for absolute centering */
+}
+
+.top_tab h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.top_tab img.logo {
+    height: 50px;
+    width: auto;
+    z-index: 2; /* keep logo above h1 if needed */
+}
+
+/* Login wrapper */
+.login-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Inner box stacking title + form */
+.login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Heading */
+.login-title {
+    font-size: 32px;
+    color: #1e1e1e;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form container */
+.login-form {
+    background: #1e1e1e;
+    padding: 40px 30px;
+    border-radius: 12px;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Role selection */
+.role-selection {
+    margin-bottom: 15px;
+}
+
+.role-selection label {
+    display: inline-block;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    margin: 10px 15px 0 0;
+}
+
+input[type="radio"] {
+    accent-color: #4A90E2;
+}
+
+/* Input fields */
+.role-fields {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease;
+}
+
+.role-fields.active {
+    max-height: 200px;
+}
+
+.role-fields input[type="text"],
+.role-fields input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: #333;
+    color: white;
+}
+
+input:disabled {
+    background-color: #555;
+    color: #ccc;
+}
+
+/* Submit button */
+.login-btn {
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 15px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 100%;
+}
+
+.login-btn:hover {
+    background-color: #357ABD;
+}
+
+/* Error messages */
+.error-messages {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    width: 320px;
+    text-align: left;
+}
+
+.credit {
+    grid-column: 1 / -1;   /* span across both columns */
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Courier New', Courier, monospace;
+}
