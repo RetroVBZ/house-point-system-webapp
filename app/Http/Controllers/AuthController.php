@@ -64,7 +64,7 @@ class AuthController extends Controller
     // Logout
     public function logout(Request $request)
     {
-        $request->session()->forget(['teacher_id', 'student_id', 'role']);
+        $request->session()->forget(['teacher_id', 'student_id', 'role', 'studentFirstName', 'studentLastName']);
         return redirect()->route('login');
     }
 
