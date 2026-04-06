@@ -1,7 +1,7 @@
 const roleRadios = document.querySelectorAll('.role-selection input[name="role"]');
 const studentFields = document.querySelector('.student-fields');
 const teacherFields = document.querySelector('.teacher-fields');
-
+//login stuff
 function toggleRoleFields(role) {
     if (role === 'student') {
         studentFields.classList.add('active');
