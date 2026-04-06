@@ -43,9 +43,7 @@
         <div class="house" id="Meghna_Magpies" style="--bg: url('{{ asset('images/meghna.png') }}')">
             <img src="{{ asset('images/magpie.png') }}" class="house-logo"> 
             <h1>Meghna Magpies</h1>
-            <h2>Points: {{  $houses['meghna']->points  }}
-                Tr. Uchhaas
-            </h2>
+            <h2>Points: {{  $houses['meghna']->points  }}</h2>
             <div class="controls">
                 <button onclick="openModal('1','add')">+</button>
                 <button onclick="openModal('1','remove')">−</button>
@@ -56,9 +54,7 @@
         <div class="house" id="Teesta_Tigers" style="--bg: url('{{ asset('images/teesta.png') }}')">
             <img src="{{ asset('images/tigers.png') }}" class="house-logo">
             <h1>Teesta Tigers</h1>
-            <h2>Points: {{  $houses['teesta']->points  }}
-                Tr. Salsabil
-            </h2>
+            <h2>Points: {{  $houses['teesta']->points  }}</h2>
             <div class="controls">
                 <button onclick="openModal('3','add')">+</button>
                 <button onclick="openModal('3','remove')">−</button>
@@ -69,9 +65,7 @@
         <div class="house" id="Jamuna_Jackals" style="--bg: url('{{ asset('images/jamuna.png') }}')">
             <img src="{{ asset('images/jackals.png') }}" class="house-logo">
             <h1>Jamuna Jackals</h1>
-            <h2>Points: {{ $houses['jamuna']->points }}
-                Tr. Tanvir
-            </h2>
+            <h2>Points: {{ $houses['jamuna']->points }}</h2>
             <div class="controls">
                 <button onclick="openModal('2','add')">+</button>
                 <button onclick="openModal('2','remove')">−</button>
@@ -82,9 +76,7 @@
         <div class="house" id="Padma_Pythons" style="--bg: url('{{ asset('images/padma.png') }}')">
             <img src="{{ asset('images/pythons.png') }}" class="house-logo">
             <h1>Padma Pythons</h1>
-            <h2>Points: {{  $houses['padma']->points  }}
-                Tr. Isat
-            </h2>
+            <h2>Points: {{  $houses['padma']->points  }}</h2>
             <div class="controls">
                 <button onclick="openModal('4','add')">+</button>
                 <button onclick="openModal('4','remove')">−</button>

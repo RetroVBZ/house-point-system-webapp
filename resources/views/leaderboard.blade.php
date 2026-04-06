@@ -41,7 +41,7 @@
                 <h1>1st</h1>
                 <h1>Meghna Magpies</h1>
                 <h2>Points: {{  $houses['meghna']->points  }}</h2>
-                <h2>Teacher: {{ $teachers['meghna']->teacherName ?? 'Mr.Uchaas' }}</h2>
+                {{-- <h2>Teacher: {{ $teachers['meghna']->teacherName ?? 'Mr.Uchaas' }}</h2> --}}
             </div>
          </a>
 
@@ -51,7 +51,7 @@
                 <h1>2nd</h1>
                 <h1>Teesta Tigers</h1>
                 <h2>Points: {{  $houses['teesta']->points  }}</h2>
-                <h2>Teacher: {{ $teachers['teesta']->teacherName ?? 'Mr.Uchaas' }}</h2>
+                {{-- <h2>Teacher: {{ $teachers['teesta']->teacherName ?? 'Mr.Uchaas' }}</h2> --}}
             </div>
          </a>
             
@@ -61,7 +61,7 @@
                 <h1>3rd</h1>
                 <h1>Jamuna Jackals</h1>
                 <h2>Points: {{  $houses['jamuna']->points  }}</h2>
-                <h2>Teacher: {{ $teachers['jamuna']->teacherName ?? 'Mr.Uchaas' }}</h2>
+                {{-- <h2>Teacher: {{ $teachers['jamuna']->teacherName ?? 'Mr.Uchaas' }}</h2> --}}
             </div>
         </a>
             
@@ -71,7 +71,7 @@
                 <h1>4th</h1>
                 <h1>Padma Pythons</h1>
                 <h2>Points: {{  $houses['padma']->points  }}</h2>
-                <h2>Teacher: {{ $teachers['padma']->teacherName ?? 'Mr.Uchaas' }}</h2>
+                {{-- <h2>Teacher: {{ $teachers['padma']->teacherName ?? 'Mr.Uchaas' }}</h2> --}}
             </div>
         </a>
     </div>

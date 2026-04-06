@@ -54,7 +54,12 @@
                 </h2>
                 <hr class="hr1">
                 <h2 class="teacher_h2">
-                    Teacher: {{ $teacher->teacherName ?? 'Mr.Uchaas' }}
+                    Teachers:
+                    @if($teachers->count() > 0)
+                        {{ $teachers->pluck('teacherName')->join(', ') }}
+                    @else
+                        No Teachers!
+                    @endif
                 </h2>
                 <hr class="hr2">
                 

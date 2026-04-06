@@ -23,14 +23,14 @@ class DropDownViewController extends Controller
         $student = \App\Http\Controllers\AuthController::currentUser();
     
         // Fetch teachers for each house
-        $teachers = [
-            'meghna' => teachers::where('houseID', 1)->first(),
-            'teesta' => teachers::where('houseID', 3)->first(),
-            'jamuna' => teachers::where('houseID', 2)->first(),
-            'padma'  => teachers::where('houseID', 4)->first(),
-        ];
+        // $teachers = [
+        //     'meghna' => teachers::where('houseID', 1)->first(),
+        //     'teesta' => teachers::where('houseID', 3)->first(),
+        //     'jamuna' => teachers::where('houseID', 2)->first(),
+        //     'padma'  => teachers::where('houseID', 4)->first(),
+        // ];
     
-        return view('leaderboard', compact('houses', 'student', 'teachers'));
+        return view('leaderboard', compact('houses', 'student'));
     }
     public function getPoints(){
         $houses = $this->pointsUpdateGlobal();
@@ -42,26 +42,25 @@ class DropDownViewController extends Controller
             'padma'  => ['points' => $houses['padma']->points],
         ]);
     }
-    public function showMeghnaMagpies(Request $request)
+    private function showHousePage(Request $request, $houseID, $viewName)
     {
-        // Get Meghna Magpies house
-        $house = houses::where('houseID', '1')->first();
-        
-        // Get teacher for this house
-        $teacher = null;
+        // Get house
+        $house = houses::where('houseID', $houseID)->first();
+
+        // Get ALL teachers (your required change)
+        $teachers = collect();
         if ($house) {
-            $teacher = teachers::where('houseID', $house->houseID)->first();
+            $teachers = teachers::where('houseID', $house->houseID)->get();
         }
-        
-        // Set default grade level to DP-2 if none is selected
+
+        // Grade logic
         $defaultGrade = 'DP-2';
         $selectedGrade = $request->has('grade_level') && $request->grade_level != '' 
             ? $request->grade_level 
             : $defaultGrade;
-        
-        // Get students based on selected grade level
+
+        // Students
         $students = collect();
-        
         if ($house) {
             $students = students::where('houseID', $house->houseID)
                 ->where('Grade', $selectedGrade)
@@ -72,98 +71,31 @@ class DropDownViewController extends Controller
 
         $houses = $this->pointsUpdateGlobal();
 
-        return view('houses.meghna_magpies', compact('house', 'teacher', 'students', 'selectedGrade', 'houses'));
+        return view($viewName, compact(
+            'house',
+            'teachers',   // plural
+            'students',
+            'selectedGrade',
+            'houses'
+        ));
+    }
+    public function showMeghnaMagpies(Request $request)
+    {
+        return $this->showHousePage($request, 1, 'houses.meghna_magpies');
     }
 
     public function showJamunaJackals(Request $request)
     {
-        // Get Meghna Magpies house
-        $house = houses::where('houseID', '2')->first();
-        
-        // Get teacher for this house
-        $teacher = null;
-        if ($house) {
-            $teacher = teachers::where('houseID', $house->houseID)->first();
-        }
-        
-        // Set default grade level to DP-2 if none is selected
-        $defaultGrade = 'DP-2';
-        $selectedGrade = $request->has('grade_level') && $request->grade_level != '' 
-            ? $request->grade_level 
-            : $defaultGrade;
-        
-        // Get students based on selected grade level
-        $students = collect();
-        
-        if ($house) {
-            $students = students::where('houseID', $house->houseID)
-                ->where('Grade', $selectedGrade)
-                ->orderBy('studentLastName')
-                ->orderBy('studentFirstName')
-                ->get();
-        }
-        
-        return view('houses.jamuna_jackals', compact('house', 'teacher', 'students', 'selectedGrade'));
-    }
-        public function showTeestaTigers(Request $request)
-    {
-        // Get Meghna Magpies house
-        $house = houses::where('houseID', '3')->first();
-        
-        // Get teacher for this house
-        $teacher = null;
-        if ($house) {
-            $teacher = teachers::where('houseID', $house->houseID)->first();
-        }
-        
-        // Set default grade level to DP-2 if none is selected
-        $defaultGrade = 'DP-2';
-        $selectedGrade = $request->has('grade_level') && $request->grade_level != '' 
-            ? $request->grade_level 
-            : $defaultGrade;
-        
-        // Get students based on selected grade level
-        $students = collect();
-        
-        if ($house) {
-            $students = students::where('houseID', $house->houseID)
-                ->where('Grade', $selectedGrade)
-                ->orderBy('studentLastName')
-                ->orderBy('studentFirstName')
-                ->get();
-        }
-        
-        return view('houses.teesta_tigers', compact('house', 'teacher', 'students', 'selectedGrade'));
+        return $this->showHousePage($request, 2, 'houses.jamuna_jackals');
     }
 
-        public function showPadmaPythons(Request $request)
+    public function showTeestaTigers(Request $request)
     {
-        // Get Meghna Magpies house
-        $house = houses::where('houseID', '4')->first();
-        
-        // Get teacher for this house
-        $teacher = null;
-        if ($house) {
-            $teacher = teachers::where('houseID', $house->houseID)->first();
-        }
-        
-        // Set default grade level to DP-2 if none is selected
-        $defaultGrade = 'DP-2';
-        $selectedGrade = $request->has('grade_level') && $request->grade_level != '' 
-            ? $request->grade_level 
-            : $defaultGrade;
-        
-        // Get students based on selected grade level
-        $students = collect();
-        
-        if ($house) {
-            $students = students::where('houseID', $house->houseID)
-                ->where('Grade', $selectedGrade)
-                ->orderBy('studentLastName')
-                ->orderBy('studentFirstName')
-                ->get();
-        }
-        
-        return view('houses.padma_pythons', compact('house', 'teacher', 'students', 'selectedGrade'));
+        return $this->showHousePage($request, 3, 'houses.teesta_tigers');
+    }
+
+    public function showPadmaPythons(Request $request)
+    {
+        return $this->showHousePage($request, 4, 'houses.padma_pythons');
     }
 }
